@@ -494,8 +494,35 @@ DECLARE @totalcountEmployee INT
 EXEC spwr_getcount @totalcountEmployee OUTPUT
 SELECT @totalcountEmployee AS total_ID
 
-
+SELECT @@ROWCOUNT
 ----------------------
+--Creating output parameters
+
+SELECT * FROM dbo.Student_detail
+
+ALTER PROCEDURE wspoutput
+@roll int,
+@para date OUTPUT
+AS
+BEGIN
+
+    SELECT * FROM dbo.Student_detail WHERE Roll=@roll 
+	
+	END
+
+--Calling stored procedures with output parameters
+
+DECLARE @callproce INT
+EXECUTE wspoutput '101', @para = @callproce OUTPUT
+SELECT @callproce as 'porduct'
+
+
+
+
+
+------------------------------------------
+
+
 
 ALTER PROC spwr_Return_Count
 AS
